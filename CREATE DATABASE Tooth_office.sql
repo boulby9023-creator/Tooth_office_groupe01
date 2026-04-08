@@ -55,6 +55,15 @@ CREATE TABLE AVIS (
     id_patient int,
     FOREIGN KEY (id_cabinet) REFERENCES cabinet(id_cabinet)
 );
+CREATE TABLE PATIENT (
+    id_patient int PRIMARY KEY AUTO_INCREMENT, 
+    nom VARCHAR(50) NOT NULL, 
+    prenom VARCHAR(50) NOT NULL, 
+    date_naissance date, 
+    telephone VARCHAR(50) NOT NULL UNIQUE, 
+    email VARCHAR(50) NOT NULL UNIQUE, 
+    adresse VARCHAR(50) NOT NULL
+);
 CREATE TABLE RENDEZ_VOUS  (
     id_rdv int PRIMARY KEY AUTO_INCREMENT, 
     date_rdv double, 
@@ -69,15 +78,7 @@ CREATE TABLE RENDEZ_VOUS  (
     FOREIGN KEY (id_Dentiste) REFERENCES DENTISTE(id_Dentiste)
 );
 
-CREATE TABLE PATIENT (
-    id_patient int PRIMARY KEY AUTO_INCREMENT, 
-    nom VARCHAR(50) NOT NULL, 
-    prenom VARCHAR(50) NOT NULL, 
-    date_naissance date, 
-    telephone VARCHAR(50) NOT NULL UNIQUE, 
-    email VARCHAR(50) NOT NULL UNIQUE, 
-    adresse VARCHAR(50) NOT NULL
-);
+
 CREATE TABLE DOSSIER_MEDICAL (
     id_dossierMedical int PRIMARY KEY AUTO_INCREMENT, 
     antecedents VARCHAR(100) NOT NULL, 
