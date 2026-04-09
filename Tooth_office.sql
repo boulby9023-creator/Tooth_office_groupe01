@@ -1,31 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 192.168.10.20
--- Generation Time: Apr 08, 2026 at 05:01 PM
--- Server version: 10.11.10-MariaDB
--- PHP Version: 8.3.11
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `Tooth_office`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `AVIS`
---
 
 CREATE DATABASE Tooth_office;
 USE Tooth_office;
@@ -39,9 +19,7 @@ CREATE TABLE `AVIS` (
   `id_patient` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `AVIS`
---
+
 
 INSERT INTO `AVIS` (`id_avis`, `note`, `commentaire`, `date_avis`, `id_cabinet`, `id_patient`) VALUES
 (1, 4.5, 'Très bon accueil et service rapide', '2026-04-05', 1, 1),
@@ -49,9 +27,7 @@ INSERT INTO `AVIS` (`id_avis`, `note`, `commentaire`, `date_avis`, `id_cabinet`,
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `CABINET`
---
+
 
 CREATE TABLE `CABINET` (
   `id_cabinet` int(11) NOT NULL,
@@ -63,9 +39,7 @@ CREATE TABLE `CABINET` (
   `id_chef_cabinet` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `CABINET`
---
+
 
 INSERT INTO `CABINET` (`id_cabinet`, `nom_cabinet`, `tel`, `adresse`, `logo`, `description`, `id_chef_cabinet`) VALUES
 (1, 'cabinet_keneya', '70230456', 'ACI 200', 'logo', 'Description tooth office', 1),
@@ -73,9 +47,7 @@ INSERT INTO `CABINET` (`id_cabinet`, `nom_cabinet`, `tel`, `adresse`, `logo`, `d
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `CHEF_CABINET`
---
+
 
 CREATE TABLE `CHEF_CABINET` (
   `id_chef_cabinet` int(11) NOT NULL,
@@ -87,9 +59,7 @@ CREATE TABLE `CHEF_CABINET` (
   `motDePasse` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `CHEF_CABINET`
---
+
 
 INSERT INTO `CHEF_CABINET` (`id_chef_cabinet`, `nom`, `prenom`, `email`, `tel`, `adresse`, `motDePasse`) VALUES
 (1, 'Diallo', 'Ali', 'alidaillo@gmail.com', '70230456', 'ACI 200', 'ali123'),
@@ -97,9 +67,7 @@ INSERT INTO `CHEF_CABINET` (`id_chef_cabinet`, `nom`, `prenom`, `email`, `tel`, 
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `CONSULTATION`
---
+
 
 CREATE TABLE `CONSULTATION` (
   `id_consultation` int(11) NOT NULL,
@@ -112,9 +80,7 @@ CREATE TABLE `CONSULTATION` (
   `id_dossierMedical` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `CONSULTATION`
---
+
 
 INSERT INTO `CONSULTATION` (`id_consultation`, `date_consultation`, `diagnostic`, `description`, `id_patient`, `id_dentiste`, `id_rdv`, `id_dossierMedical`) VALUES
 (1, '2026-04-09', 'Carie dentaire', 'Présence d’une carie sur la molaire gauche, nettoyage et traitement recommandés', 1, 1, 1, NULL),
@@ -124,9 +90,7 @@ INSERT INTO `CONSULTATION` (`id_consultation`, `date_consultation`, `diagnostic`
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `DENTISTE`
---
+
 
 CREATE TABLE `DENTISTE` (
   `id_Dentiste` int(11) NOT NULL,
@@ -140,9 +104,7 @@ CREATE TABLE `DENTISTE` (
   `id_cabinet` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `DENTISTE`
---
+
 
 INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `adresse`, `motDePasse`, `specialité`, `id_cabinet`) VALUES
 (1, 'Konaté', 'Idrissa', 'idrissakonate@gmail.com', '70245678', 'BADALABOUGOU', 'idrissa123', 'Generaliste', 1),
@@ -153,9 +115,7 @@ INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `a
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `DOSSIER_MEDICAL`
---
+
 
 CREATE TABLE `DOSSIER_MEDICAL` (
   `id_dossierMedical` int(11) NOT NULL,
@@ -167,9 +127,7 @@ CREATE TABLE `DOSSIER_MEDICAL` (
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `PATIENT`
---
+
 
 CREATE TABLE `PATIENT` (
   `id_patient` int(11) NOT NULL,
@@ -182,9 +140,7 @@ CREATE TABLE `PATIENT` (
   `motDePasse` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `PATIENT`
---
+
 
 INSERT INTO `PATIENT` (`id_patient`, `nom`, `prenom`, `date_naissance`, `telephone`, `email`, `adresse`, `motDePasse`) VALUES
 (1, 'Diallo', 'Ali', '2000-03-04', '70230456', 'alidaillo@gmail.com', 'ACI 200', 'ali123'),
@@ -196,9 +152,7 @@ INSERT INTO `PATIENT` (`id_patient`, `nom`, `prenom`, `date_naissance`, `telepho
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `RENDEZ_VOUS`
---
+
 
 CREATE TABLE `RENDEZ_VOUS` (
   `id_rdv` int(11) NOT NULL,
@@ -223,9 +177,7 @@ INSERT INTO `RENDEZ_VOUS` (`id_rdv`, `date_rdv`, `motif`, `statut`, `id_patient`
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `SECRETAIRE`
---
+
 
 CREATE TABLE `SECRETAIRE` (
   `id_Secretaire` int(11) NOT NULL,
@@ -238,9 +190,7 @@ CREATE TABLE `SECRETAIRE` (
   `id_cabinet` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `SECRETAIRE`
---
+
 
 INSERT INTO `SECRETAIRE` (`id_Secretaire`, `nom`, `prenom`, `email`, `tel`, `adresse`, `motDePasse`, `id_cabinet`) VALUES
 (1, 'Traore', 'Moussa', 'moussa.traore@gmail.com', '70112233', 'Kati', 'secret456', 1),
@@ -248,9 +198,7 @@ INSERT INTO `SECRETAIRE` (`id_Secretaire`, `nom`, `prenom`, `email`, `tel`, `adr
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `TRAITEMENT`
---
+
 
 CREATE TABLE `TRAITEMENT` (
   `id_traitement` int(11) NOT NULL,
@@ -269,9 +217,7 @@ CREATE TABLE `TRAITEMENT` (
 INSERT INTO `TRAITEMENT` (`id_traitement`, `nom`, `description`, `date_debut`, `date_fin`, `type_traitement`, `id_consultation`) VALUES
 (1, 'Traitement carie', 'Nettoyage de la carie et pose d’un composite', '2026-04-09', '2026-04-11', 'Curatif', 1);
 
---
--- Indexes for dumped tables
---
+
 
 --
 -- Indexes for table `AVIS`
@@ -281,25 +227,19 @@ ALTER TABLE `AVIS`
   ADD KEY `id_cabinet` (`id_cabinet`),
   ADD KEY `fk_id_patient` (`id_patient`);
 
---
--- Indexes for table `CABINET`
---
+
 ALTER TABLE `CABINET`
   ADD PRIMARY KEY (`id_cabinet`),
   ADD UNIQUE KEY `tel` (`tel`),
   ADD KEY `id_chef_cabinet` (`id_chef_cabinet`);
 
---
--- Indexes for table `CHEF_CABINET`
---
+
 ALTER TABLE `CHEF_CABINET`
   ADD PRIMARY KEY (`id_chef_cabinet`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `tel` (`tel`);
 
---
--- Indexes for table `CONSULTATION`
---
+
 ALTER TABLE `CONSULTATION`
   ADD PRIMARY KEY (`id_consultation`),
   ADD KEY `id_patient` (`id_patient`),
@@ -307,42 +247,32 @@ ALTER TABLE `CONSULTATION`
   ADD KEY `id_rdv` (`id_rdv`),
   ADD KEY `id_dossierMedical` (`id_dossierMedical`);
 
---
--- Indexes for table `DENTISTE`
---
+
 ALTER TABLE `DENTISTE`
   ADD PRIMARY KEY (`id_Dentiste`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `telephone` (`telephone`),
   ADD KEY `id_cabinet` (`id_cabinet`);
 
---
--- Indexes for table `DOSSIER_MEDICAL`
---
+
 ALTER TABLE `DOSSIER_MEDICAL`
   ADD PRIMARY KEY (`id_dossierMedical`),
   ADD KEY `id_patient` (`id_patient`);
 
---
--- Indexes for table `PATIENT`
---
+
 ALTER TABLE `PATIENT`
   ADD PRIMARY KEY (`id_patient`),
   ADD UNIQUE KEY `telephone` (`telephone`),
   ADD UNIQUE KEY `email` (`email`);
 
---
--- Indexes for table `RENDEZ_VOUS`
---
+
 ALTER TABLE `RENDEZ_VOUS`
   ADD PRIMARY KEY (`id_rdv`),
   ADD KEY `id_patient` (`id_patient`),
   ADD KEY `id_Secretaire` (`id_Secretaire`),
   ADD KEY `id_Dentiste` (`id_Dentiste`);
 
---
--- Indexes for table `SECRETAIRE`
---
+
 ALTER TABLE `SECRETAIRE`
   ADD PRIMARY KEY (`id_Secretaire`),
   ADD UNIQUE KEY `email` (`email`),
