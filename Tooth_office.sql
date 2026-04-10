@@ -100,7 +100,7 @@ CREATE TABLE `DENTISTE` (
   `telephone` varchar(50) NOT NULL,
   `adresse` varchar(50) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `specialité` varchar(50) NOT NULL,
+  `specialite` varchar(50) NOT NULL,
   `id_cabinet` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
