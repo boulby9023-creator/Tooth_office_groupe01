@@ -144,7 +144,7 @@ CREATE TABLE `DENTISTE` (
 -- Dumping data for table `DENTISTE`
 --
 
-INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `adresse`, `motDePasse`, `specialité`, `id_cabinet`) VALUES
+INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `adresse`, `motDePasse`, `specialite`, `id_cabinet`) VALUES
 (1, 'Konaté', 'Idrissa', 'idrissakonate@gmail.com', '70245678', 'BADALABOUGOU', 'idrissa123', 'Generaliste', 1),
 (2, 'Coulibaly', 'Mamadou', 'mamadou.coulibaly@gmail.com', '76001122', 'Bamako', 'dent123', 'Orthodontie', 1),
 (3, 'Konate', 'Awa', 'awa.konate@gmail.com', '77002233', 'Bamako', 'pass456', 'Chirurgie dentaire', 1),
