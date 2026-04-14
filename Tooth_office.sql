@@ -75,6 +75,7 @@ CREATE TABLE Rendez_vous (
     id_dentiste INT,
     FOREIGN KEY (id_patient) REFERENCES Patient(id_patient),
     FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
+    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
 );
 
 -- Table Créneau
@@ -85,7 +86,8 @@ CREATE TABLE Creneau (
     heure_fin TIME,
     disponible boolean,
     id_rendez_vous INT,
-    FOREIGN KEY (id_rendez_vous) REFERENCES Rendez_vous(id_rendez_vous)
+    FOREIGN KEY (id_rendez_vous) REFERENCES Rendez_vous(id_rendez_vous),
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
 );
 
 
