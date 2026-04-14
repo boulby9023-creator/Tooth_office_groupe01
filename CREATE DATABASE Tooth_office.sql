@@ -111,6 +111,10 @@ CREATE TABLE TRAITEMENT (
     FOREIGN KEY (id_consultation) REFERENCES CONSULTATION(id_consultation)
     
 )
+CREATE TABLE ASSIGNATION_CAB_SER(
+    id_assignation_cab_ser int PRIMARY KEY AUTO_INCREMENT,
+    prix int not null,
+    description VARCHAR(200),
 
 CREATE TABLE SERVICE (
     id_service int PRIMARY KEY AUTO_INCREMENT, 
