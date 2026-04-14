@@ -427,3 +427,5 @@ COMMIT;
 
 /* creation de la table creneau*/
  create table creneau(id_creneau int primary key auto_increment, date date, heure_debut varchar(25), heure_fin varchar(25),disponible boolean);
+/* creation de la table Paiement_Abonnement*/
+ create table Paiement_Abonnement (id_paiement INT AUTO_INCREMENT PRIMARY KEY, montant varchar(50), mode_paiement enum('om', 'moov', 'carte', 'espèces'), date_paiement date);
