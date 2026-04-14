@@ -110,20 +110,42 @@ CREATE TABLE TRAITEMENT (
     id_consultation int,
     FOREIGN KEY (id_consultation) REFERENCES CONSULTATION(id_consultation)
     
-)
+);
 CREATE TABLE ASSIGNATION_CAB_SER(
     id_assignation_cab_ser int PRIMARY KEY AUTO_INCREMENT,
     prix int not null,
-    description VARCHAR(200),
+    description VARCHAR(200)
+    );
 
 CREATE TABLE SERVICE (
     id_service int PRIMARY KEY AUTO_INCREMENT, 
     nom_service VARCHAR(50) NOT NULL,  
-    dateCreation date,     
-)
+    dateCreation date    
+);
 
-CREATE TABLE CABINET_SERVICE (
-    prix int, 
-    description VARCHAR(50) NOT NULL,  
-    dateCreation date,     
+CREATE TABLE PLAN_ABONNEMENT(
+    id_plan int PRIMARY KEY AUTO_INCREMENT,
+    nom varchar(50) NOT NULL,
+    prix_mensuel int NOT NULL,
+    prix_annuel int NOT NULL,
+    max_cabinet int NOT NULL,
+    max_dentiste int NOT NULL,
+    max_secretaire int NOT NULL,
+    description text
+);
+
+CREATE TABLE ABONNEMENT(
+	id_abonnement int PRIMARY KEY AUTO_INCREMENT,
+	date_debut date NOT NULL,
+	date_fin date NOT NULL,
+	etat_abonnement enum('actif','suspendu','expire') NOT NULL,
+	type_paiement enum('mensuel','annuel') NOT NULL,
+	montant_total int NOT NULL
+);
+
+CREATE TABLE PAIEMENT_ABONNEMENT(
+	id_paiement int PRIMARY KEY AUTO_INCREMENT,
+	montant int NOT NULL,
+	mode_paiement enum('carte_bancaire','mobile_money') NOT NULL,
+	date_paiement datetime NOT NULL
 )

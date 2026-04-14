@@ -66,7 +66,7 @@ CREATE TABLE Creneau (
     date DATE,
     heure_debut TIME,
     heure_fin TIME,
-    disponible BOOLEAN
+    disponible boolean
 );
 
 -- Table Rendez-vous
@@ -134,14 +134,23 @@ CREATE TABLE Avis (
 -- Table Plan d'Abonnement
 CREATE TABLE Plan_Abonnement (
     id_plan INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100),
-    prix DECIMAL(10,2)
+    nom varchar(50) NOT NULL,
+    prix_mensuel int NOT NULL,
+    prix_annuel int NOT NULL,
+    max_cabinet int NOT NULL,
+    max_dentiste int NOT NULL,
+    max_secretaire int NOT NULL,
+    description text
 );
 
 -- Table Abonnement
 CREATE TABLE Abonnement (
     id_abonnement INT PRIMARY KEY AUTO_INCREMENT,
+    date_debut date NOT NULL,
+	  date_fin date NOT NULL,
     etat ENUM('ACTIF','SUSPENDU','EXPIRE') DEFAULT 'ACTIF',
+    type_paiement enum('mensuel','annuel') NOT NULL,
+	  montant_total int NOT NULL
     id_chef_cabinet INT,
     id_plan INT,
     FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
@@ -150,9 +159,10 @@ CREATE TABLE Abonnement (
 
 -- Table Paiement Abonnement
 CREATE TABLE Paiement_Abonnement (
-    id_paiement INT PRIMARY KEY AUTO_INCREMENT,
-    type ENUM('MENSUEL','ANNUEL') DEFAULT 'MENSUEL',
-    datePaiement DATE,
+    id_paiement int PRIMARY KEY AUTO_INCREMENT,
+    montant int NOT NULL,
+    mode_paiement enum('cash','carte_bancaire','mobile_money') DEFAULT 'cash' NOT NULL,
+    date_paiement datetime NOT NULL
     id_abonnement INT,
     FOREIGN KEY (id_abonnement) REFERENCES Abonnement(id_abonnement)
 );
