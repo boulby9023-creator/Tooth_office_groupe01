@@ -181,3 +181,14 @@ CREATE TABLE ASSIGNATION_CAB_SER(
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
     );
+CREATE TABLE  SERVICE_DENTISTE (
+  id_Dentiste int PRIMARY KEY AUTO_INCREMENT,
+  FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
+  FOREIGN KEY (id_dentiste) REFERENCES Dentiste(Dentiste)
+ );
+
+CREATE TABLE  CHEFCABINET_CABINET (
+  id_CHEFCABINET_CABINET int PRIMARY KEY AUTO_INCREMENT,
+  FOREIGN KEY (id_chef_cabinet) REFERENCES SERVICES(id_chef_cabinet),
+  FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
+ )
