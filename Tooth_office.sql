@@ -166,3 +166,18 @@ CREATE TABLE Paiement_Abonnement (
     id_abonnement INT,
     FOREIGN KEY (id_abonnement) REFERENCES Abonnement(id_abonnement)
 );
+
+
+CREATE TABLE SERVICES (
+    id_service int PRIMARY KEY AUTO_INCREMENT, 
+    nom_service VARCHAR(50) NOT NULL,  
+    dateCreation date    
+);
+
+CREATE TABLE ASSIGNATION_CAB_SER(
+    id_assignation_cab_ser int PRIMARY KEY AUTO_INCREMENT,
+    prix int not null,
+    description VARCHAR(200),
+    FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
+    );
