@@ -142,9 +142,9 @@ CREATE TABLE Plan_Abonnement (
 CREATE TABLE Abonnement (
     id_abonnement INT PRIMARY KEY AUTO_INCREMENT,
     etat ENUM('ACTIF','SUSPENDU','EXPIRE') DEFAULT 'ACTIF',
-    id_cabinet INT,
+    id_chef_cabinet INT,
     id_plan INT,
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet),
+    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
     FOREIGN KEY (id_plan) REFERENCES Plan_Abonnement(id_plan)
 );
 
