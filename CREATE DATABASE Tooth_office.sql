@@ -111,3 +111,15 @@ CREATE TABLE TRAITEMENT (
     FOREIGN KEY (id_consultation) REFERENCES CONSULTATION(id_consultation)
     
 )
+
+CREATE TABLE SERVICE (
+    id_service int PRIMARY KEY AUTO_INCREMENT, 
+    nom_service VARCHAR(50) NOT NULL,  
+    dateCreation date,     
+)
+
+CREATE TABLE CABINET_SERVICE (
+    prix int, 
+    description VARCHAR(50) NOT NULL,  
+    dateCreation date,     
+)
