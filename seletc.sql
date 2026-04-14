@@ -1,4 +1,6 @@
-SELECT * FROM  PATIENT
+
+
+SELECT * FROM  PATIENT
 SELECT p.nom, p.prenom, r.date_rdv, r.motif FROM RENDEZ_VOUS as r JOIN PATIENT as p ON r.id_patient=p.id_patient WHERE p.id_patient=1;
 SELECT c.date_consultation, c.diagnostic, c.description, d.nom, d.prenom FROM CONSULTATION as c JOIN DENTISTE as d ON c.id_dentiste=d.id_Dentiste;
 SELECT c.date_consultation, c.diagnostic, c.description, d.nom AS nomDentiste, d.prenom AS prenomDentiste, p.nom, p.prenom FROM CONSULTATION as c JOIN DENTISTE as d ON c.id_dentiste=d.id_Dentiste JOIN PATIENT as p ON p.id_patient=c.id_patient;

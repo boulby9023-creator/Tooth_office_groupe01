@@ -136,7 +136,7 @@ CREATE TABLE `DENTISTE` (
   `telephone` varchar(50) NOT NULL,
   `adresse` varchar(50) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `specialité` varchar(50) NOT NULL,
+  `specialite` varchar(50) NOT NULL,
   `id_cabinet` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -144,7 +144,7 @@ CREATE TABLE `DENTISTE` (
 -- Dumping data for table `DENTISTE`
 --
 
-INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `adresse`, `motDePasse`, `specialité`, `id_cabinet`) VALUES
+INSERT INTO `DENTISTE` (`id_Dentiste`, `nom`, `prenom`, `email`, `telephone`, `adresse`, `motDePasse`, `specialite`, `id_cabinet`) VALUES
 (1, 'Konaté', 'Idrissa', 'idrissakonate@gmail.com', '70245678', 'BADALABOUGOU', 'idrissa123', 'Generaliste', 1),
 (2, 'Coulibaly', 'Mamadou', 'mamadou.coulibaly@gmail.com', '76001122', 'Bamako', 'dent123', 'Orthodontie', 1),
 (3, 'Konate', 'Awa', 'awa.konate@gmail.com', '77002233', 'Bamako', 'pass456', 'Chirurgie dentaire', 1),
@@ -424,3 +424,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/* creation de la table creneau*/
+ create table creneau(id_creneau int primary key auto_increment, date date, heure_debut varchar(25), heure_fin varchar(25),disponible boolean);
