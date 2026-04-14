@@ -189,6 +189,6 @@ CREATE TABLE  SERVICE_DENTISTE (
 
 CREATE TABLE  CHEFCABINET_CABINET (
   id_CHEFCABINET_CABINET int PRIMARY KEY AUTO_INCREMENT,
-  FOREIGN KEY (id_chef_cabinet) REFERENCES SERVICES(id_chef_cabinet),
+  FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
   FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
  )
