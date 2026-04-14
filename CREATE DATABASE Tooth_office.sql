@@ -46,6 +46,13 @@ CREATE TABLE DENTISTE(
     FOREIGN KEY (id_cabinet) REFERENCES cabinet(id_cabinet)
 );
 
+CREATE TABLE SERVICE_DENTISTE (
+    id_service INT,
+    id_dentiste INT,
+    PRIMARY KEY (id_service, id_dentiste),
+    FOREIGN KEY (id_service) REFERENCES SERVICE(id_service)
+);
+
 CREATE TABLE AVIS (
     id_avis int PRIMARY KEY AUTO_INCREMENT, 
     note double, 
