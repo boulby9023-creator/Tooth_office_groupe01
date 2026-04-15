@@ -58,7 +58,7 @@ CREATE TABLE Secretaire (
 CREATE TABLE Dentiste (
     id_dentiste INT PRIMARY KEY,
     specialite VARCHAR(100),
-    id_cabinet INT NOT NULL,
+    id_cabinet INT ,
     id_chef_cabinet INT,
     FOREIGN KEY (id_dentiste) REFERENCES Utilisateur(id_utilisateur) ON DELETE CASCADE,
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE CASCADE,
@@ -75,6 +75,19 @@ CREATE TABLE Patient (
 );
 
 -- =============================================
+-- Table Créneau
+-- =============================================
+CREATE TABLE Creneau (
+    id_creneau INT PRIMARY KEY AUTO_INCREMENT,
+    date DATE NOT NULL,
+    heure_debut TIME NOT NULL,
+    heure_fin TIME NOT NULL,
+    disponible BOOLEAN DEFAULT TRUE,
+    id_dentiste INT,
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE SET NULL
+);
+
+-- =============================================
 -- Table Rendez-vous
 -- =============================================
 CREATE TABLE Rendez_vous (
@@ -87,25 +100,14 @@ CREATE TABLE Rendez_vous (
     id_patient INT NOT NULL,
     id_dentiste INT NOT NULL,
     id_secretaire INT,
+    id_creneau int, 
     FOREIGN KEY (id_patient) REFERENCES Patient(id_patient) ON DELETE CASCADE,
     FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE RESTRICT,
-    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire)
+    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
+    FOREIGN KEY (id_creneau) REFERENCES Creneau(id_creneau)
 );
 
--- =============================================
--- Table Créneau
--- =============================================
-CREATE TABLE Creneau (
-    id_creneau INT PRIMARY KEY AUTO_INCREMENT,
-    date DATE NOT NULL,
-    heure_debut TIME NOT NULL,
-    heure_fin TIME NOT NULL,
-    disponible BOOLEAN DEFAULT TRUE,
-    id_rendez_vous INT,
-    id_dentiste INT,
-    FOREIGN KEY (id_rendez_vous) REFERENCES Rendez_vous(id_rendez_vous) ON DELETE SET NULL,
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE SET NULL
-);
+
 
 -- =============================================
 -- Table Dossier Médical
@@ -238,3 +240,4 @@ CREATE TABLE CHEFCABINET_CABINET (
     -- EMPÊCHE LES DOUBLONS (1,2) et (1,2)
     UNIQUE KEY unique_chef_cabinet (id_chef_cabinet, id_cabinet)
 );
+

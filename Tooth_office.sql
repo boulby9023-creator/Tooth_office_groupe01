@@ -54,33 +54,37 @@ CREATE TABLE Patient (
     FOREIGN KEY (id_patient) REFERENCES Utilisateur(id_utilisateur)
 );
 
+-- =============================================
+-- Table Créneau
+-- =============================================
+CREATE TABLE Creneau (
+    id_creneau INT PRIMARY KEY AUTO_INCREMENT,
+    date DATE NOT NULL,
+    heure_debut TIME NOT NULL,
+    heure_fin TIME NOT NULL,
+    disponible BOOLEAN DEFAULT TRUE,
+    id_dentiste INT,
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE SET NULL
+);
+
+-- =============================================
 -- Table Rendez-vous
+-- =============================================
 CREATE TABLE Rendez_vous (
     id_rendez_vous INT PRIMARY KEY AUTO_INCREMENT,
-    date_RDV DATETIME,
+    date_RDV DATETIME NOT NULL,
     motif VARCHAR(50),
     note TEXT,
     etat_RDV ENUM('EN_ATTENTE','VALIDE','FAIT','ANNULE','REPORTE') DEFAULT 'EN_ATTENTE',
     type_rdv ENUM('ENLIGNE','SURPLACE') DEFAULT 'ENLIGNE',
-    id_patient INT,
-    id_dentiste INT,
+    id_patient INT NOT NULL,
+    id_dentiste INT NOT NULL,
     id_secretaire INT,
-    FOREIGN KEY (id_patient) REFERENCES Patient(id_patient),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste),
-    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire)
-);
-
--- Table Créneau
-CREATE TABLE Creneau (
-    id_creneau INT PRIMARY KEY AUTO_INCREMENT,
-    date DATE,
-    heure_debut TIME,
-    heure_fin TIME,
-    disponible boolean,
-    id_rendez_vous INT,
-    id_dentiste INT,
-    FOREIGN KEY (id_rendez_vous) REFERENCES Rendez_vous(id_rendez_vous),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
+    id_creneau int, 
+    FOREIGN KEY (id_patient) REFERENCES Patient(id_patient) ON DELETE CASCADE,
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE RESTRICT,
+    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
+    FOREIGN KEY (id_creneau) REFERENCES Creneau(id_creneau)
 );
 
 
@@ -182,7 +186,7 @@ CREATE TABLE ASSIGNATION_CAB_SER(
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
     );
-    
+
 CREATE TABLE  SERVICE_DENTISTE (
     id_service INT NOT NULL,
     id_dentiste INT NOT NULL,
