@@ -1,4 +1,4 @@
--- Requetes SELECT adaptees a la nouvelle structure de base de donnees
+-- Requetes SELECT adaptees a la structure de base de donnees
 
 -- 1. Afficher tous les patients avec leurs informations
 SELECT 
@@ -12,7 +12,7 @@ SELECT
 FROM Patient p
 JOIN Utilisateur u ON p.id_patient = u.id_utilisateur;
 
--- 2. Afficher les rendez-vous d'un patient specifique (id_patient = 10)
+-- 2. Afficher les rendez-vous d un patient specifique (id_patient = 10)
 SELECT 
     u.nom,
     u.prenom,
@@ -131,14 +131,90 @@ ORDER BY a.date_avis DESC;
 SELECT 
     ab.id_abonnement,
     ab.etat,
+    ab.date_debut,
+    ab.date_fin,
+    ab.type_paiement,
+    ab.montant_total,
     u.nom AS nomChef,
     u.prenom AS prenomChef,
     cab.nom_cabinet,
     pl.nom AS nomPlan,
-    pl.prix
+    pl.prix_mensuel,
+    pl.prix_annuel
 FROM Abonnement ab
 JOIN Chef_Cabinet cc ON ab.id_chef_cabinet = cc.id_chef_cabinet
 JOIN Utilisateur u ON cc.id_chef_cabinet = u.id_utilisateur
-JOIN Cabinet cab ON cc.id_cabinet = cab.id_cabinet
+JOIN CHEFCABINET_CABINET ccc ON cc.id_chef_cabinet = ccc.id_chef_cabinet
+JOIN Cabinet cab ON ccc.id_cabinet = cab.id_cabinet
 JOIN Plan_Abonnement pl ON ab.id_plan = pl.id_plan
 WHERE ab.etat = 'ACTIF';
+
+-- 11. Afficher les services offerts par chaque cabinet avec leurs prix
+SELECT 
+    cab.nom_cabinet,
+    s.nom_service,
+    acs.prix,
+    acs.description
+FROM ASSIGNATION_CAB_SER acs
+JOIN Cabinet cab ON acs.id_cabinet = cab.id_cabinet
+JOIN SERVICES s ON acs.id_service = s.id_service
+ORDER BY cab.nom_cabinet, s.nom_service;
+
+-- 12. Afficher les dentistes avec les services qu ils offrent
+SELECT 
+    u.nom,
+    u.prenom,
+    d.specialite,
+    s.nom_service
+FROM SERVICE_DENTISTE sd
+JOIN Dentiste d ON sd.id_dentiste = d.id_dentiste
+JOIN Utilisateur u ON d.id_dentiste = u.id_utilisateur
+JOIN SERVICES s ON sd.id_service = s.id_service
+ORDER BY u.nom, u.prenom;
+
+-- 13. Afficher les creneaux disponibles par dentiste
+SELECT 
+    u.nom AS nomDentiste,
+    u.prenom AS prenomDentiste,
+    cr.date,
+    cr.heure_debut,
+    cr.heure_fin,
+    cr.disponible
+FROM Creneau cr
+JOIN Dentiste d ON cr.id_dentiste = d.id_dentiste
+JOIN Utilisateur u ON d.id_dentiste = u.id_utilisateur
+WHERE cr.disponible = TRUE
+ORDER BY cr.date, cr.heure_debut;
+
+-- 14. Afficher l historique complet d un patient (rendez-vous, consultations, traitements)
+SELECT 
+    up.nom AS nomPatient,
+    up.prenom AS prenomPatient,
+    r.date_RDV,
+    r.motif,
+    r.etat_RDV,
+    c.diagnostic,
+    c.notes,
+    t.nom AS nomTraitement,
+    t.type_traitement,
+    ud.nom AS nomDentiste,
+    ud.prenom AS prenomDentiste
+FROM Patient p
+JOIN Utilisateur up ON p.id_patient = up.id_utilisateur
+LEFT JOIN Rendez_vous r ON p.id_patient = r.id_patient
+LEFT JOIN Consultation c ON r.id_rendez_vous = c.id_rendez_vous
+LEFT JOIN Traitement t ON c.id_consultation = t.id_consultation
+LEFT JOIN Dentiste d ON r.id_dentiste = d.id_dentiste
+LEFT JOIN Utilisateur ud ON d.id_dentiste = ud.id_utilisateur
+WHERE p.id_patient = 10
+ORDER BY r.date_RDV DESC;
+
+-- 15. Statistiques: Nombre de patients par cabinet
+SELECT 
+    cab.nom_cabinet,
+    COUNT(DISTINCT r.id_patient) AS nombre_patients
+FROM Cabinet cab
+LEFT JOIN Dentiste d ON cab.id_cabinet = d.id_cabinet
+LEFT JOIN Rendez_vous r ON d.id_dentiste = r.id_dentiste
+GROUP BY cab.id_cabinet, cab.nom_cabinet
+ORDER BY nombre_patients DESC;
