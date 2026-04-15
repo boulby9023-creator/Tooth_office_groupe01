@@ -41,8 +41,8 @@ CREATE TABLE Secretaire (
     id_cabinet INT,
     id_chef_cabinet INT,
     FOREIGN KEY (id_secretaire) REFERENCES Utilisateur(id_utilisateur),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
-    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet),
+    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet)
 );
 
 -- Table Dentiste
@@ -52,8 +52,8 @@ CREATE TABLE Dentiste (
     id_cabinet INT,
     id_chef_cabinet INT,
     FOREIGN KEY (id_dentiste) REFERENCES Utilisateur(id_utilisateur),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
-    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet),
+    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet)
 );
 
 -- Table Patient
@@ -73,9 +73,10 @@ CREATE TABLE Rendez_vous (
     type_rdv ENUM('ENLIGNE','SURPLACE') DEFAULT 'ENLIGNE',
     id_patient INT,
     id_dentiste INT,
+    id_secretaire INT,
     FOREIGN KEY (id_patient) REFERENCES Patient(id_patient),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
-    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste),
+    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire)
 );
 
 -- Table Créneau
@@ -86,6 +87,7 @@ CREATE TABLE Creneau (
     heure_fin TIME,
     disponible boolean,
     id_rendez_vous INT,
+    id_dentiste INT,
     FOREIGN KEY (id_rendez_vous) REFERENCES Rendez_vous(id_rendez_vous),
     FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
 );
@@ -157,7 +159,7 @@ CREATE TABLE Abonnement (
 	date_fin date NOT NULL,
     etat ENUM('ACTIF','SUSPENDU','EXPIRE') DEFAULT 'ACTIF',
     type_paiement enum('mensuel','annuel') NOT NULL,
-	montant_total int NOT NULL
+	montant_total int NOT NULL,
     id_chef_cabinet INT,
     id_plan INT,
     FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
@@ -169,7 +171,7 @@ CREATE TABLE Paiement_Abonnement (
     id_paiement int PRIMARY KEY AUTO_INCREMENT,
     montant int NOT NULL,
     mode_paiement enum('cash','carte_bancaire','mobile_money') DEFAULT 'cash' NOT NULL,
-    date_paiement datetime NOT NULL
+    date_paiement datetime NOT NULL,
     id_abonnement INT,
     FOREIGN KEY (id_abonnement) REFERENCES Abonnement(id_abonnement)
 );
@@ -191,7 +193,7 @@ CREATE TABLE ASSIGNATION_CAB_SER(
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
     );
 CREATE TABLE  SERVICE_DENTISTE (
-    id_Dentiste int PRIMARY KEY AUTO_INCREMENT,
+    id_service_dentiste int PRIMARY KEY AUTO_INCREMENT,
     id_service int,
     id_dentiste int,
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
