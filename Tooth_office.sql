@@ -31,29 +31,20 @@ CREATE TABLE Cabinet (
 -- Table Chef de Cabinet
 CREATE TABLE Chef_Cabinet (
     id_chef_cabinet INT PRIMARY KEY,
-    id_cabinet INT,
     FOREIGN KEY (id_chef_cabinet) REFERENCES Utilisateur(id_utilisateur)
 );
 
 -- Table Secrétaire
 CREATE TABLE Secretaire (
     id_secretaire INT PRIMARY KEY,
-    id_cabinet INT,
-    id_chef_cabinet INT,
-    FOREIGN KEY (id_secretaire) REFERENCES Utilisateur(id_utilisateur),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet),
-    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet)
+    FOREIGN KEY (id_secretaire) REFERENCES Utilisateur(id_utilisateur)
 );
 
 -- Table Dentiste
 CREATE TABLE Dentiste (
     id_dentiste INT PRIMARY KEY,
     specialite VARCHAR(100),
-    id_cabinet INT,
-    id_chef_cabinet INT,
-    FOREIGN KEY (id_dentiste) REFERENCES Utilisateur(id_utilisateur),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet),
-    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet)
+    FOREIGN KEY (id_dentiste) REFERENCES Utilisateur(id_utilisateur)
 );
 
 -- Table Patient
@@ -183,27 +174,43 @@ CREATE TABLE SERVICES (
 );
 
 CREATE TABLE ASSIGNATION_CAB_SER(
-    id_assignation_cab_ser int PRIMARY KEY AUTO_INCREMENT,
-    prix int not null,
-    description VARCHAR(200),
     id_service int,
     id_cabinet int,
+    prix int not null,
+    description VARCHAR(200),
+    PRIMARY KEY (id_service, id_cabinet),
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
     );
     
 CREATE TABLE  SERVICE_DENTISTE (
-    id_service_dentiste int PRIMARY KEY AUTO_INCREMENT,
-    id_service int,
-    id_dentiste int,
+    id_service INT NOT NULL,
+    id_dentiste INT NOT NULL,
+    PRIMARY KEY (id_service, id_dentiste),
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(Dentiste)
- );
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
+);
 
-CREATE TABLE  CHEFCABINET_CABINET (
-  id_CHEFCABINET_CABINET int PRIMARY KEY AUTO_INCREMENT,
-  id_chef_cabinet INT,
-  id_cabinet INT,
-  FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
-  FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
- )
+CREATE TABLE CHEFCABINET_CABINET (
+    id_chef_cabinet INT NOT NULL,
+    id_cabinet INT NOT NULL,
+    PRIMARY KEY (id_chef_cabinet, id_cabinet),
+    FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
+);
+
+CREATE TABLE SECRETAIRE_CABINET (
+    id_secretaire INT NOT NULL,
+    id_cabinet INT NOT NULL,
+    PRIMARY KEY (id_secretaire, id_cabinet),
+    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
+);
+
+CREATE TABLE DENTISTE_CABINET (
+    id_dentiste INT NOT NULL,
+    id_cabinet INT NOT NULL,
+    PRIMARY KEY (id_dentiste, id_cabinet),
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste),
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
+);
