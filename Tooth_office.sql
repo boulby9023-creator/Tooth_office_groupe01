@@ -176,7 +176,6 @@ CREATE TABLE Paiement_Abonnement (
     FOREIGN KEY (id_abonnement) REFERENCES Abonnement(id_abonnement)
 );
 
-
 CREATE TABLE SERVICES (
     id_service int PRIMARY KEY AUTO_INCREMENT, 
     nom_service VARCHAR(50) NOT NULL,  
@@ -192,6 +191,7 @@ CREATE TABLE ASSIGNATION_CAB_SER(
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
     );
+    
 CREATE TABLE  SERVICE_DENTISTE (
     id_service_dentiste int PRIMARY KEY AUTO_INCREMENT,
     id_service int,

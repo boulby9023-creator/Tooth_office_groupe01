@@ -45,7 +45,7 @@ CREATE TABLE Chef_Cabinet (
 -- =============================================
 CREATE TABLE Secretaire (
     id_secretaire INT PRIMARY KEY,
-    id_cabinet INT NOT NULL,
+    id_cabinet INT,
     id_chef_cabinet INT,
     FOREIGN KEY (id_secretaire) REFERENCES Utilisateur(id_utilisateur) ON DELETE CASCADE,
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE SET NULL,
