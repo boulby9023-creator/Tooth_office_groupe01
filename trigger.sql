@@ -18,7 +18,6 @@ BEGIN
     JOIN Plan_Abonnement pa ON a.id_plan = pa.id_plan
     WHERE a.id_chef_cabinet = NEW.id_chef_cabinet
       AND a.etat = 'ACTIF'
-      AND a.actif = TRUE
     ORDER BY a.date_fin DESC
     LIMIT 1;
 

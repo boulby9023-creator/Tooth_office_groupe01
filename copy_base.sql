@@ -240,3 +240,4 @@ CREATE TABLE CHEFCABINET_CABINET (
     -- EMPÊCHE LES DOUBLONS (1,2) et (1,2)
     UNIQUE KEY unique_chef_cabinet (id_chef_cabinet, id_cabinet)
 );
+
