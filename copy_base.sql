@@ -209,35 +209,31 @@ CREATE TABLE SERVICES (
 );
 
 CREATE TABLE ASSIGNATION_CAB_SER (
-    id_assignation_cab_ser INT PRIMARY KEY AUTO_INCREMENT,
     prix INT NOT NULL,
     description VARCHAR(200),
     id_service INT NOT NULL,
     id_cabinet INT NOT NULL,
+    PRIMARY KEY (id_service, id_cabinet),
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service) ON DELETE CASCADE,
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE CASCADE
 );
 
 CREATE TABLE SERVICE_DENTISTE (
-    id_service_dentiste INT PRIMARY KEY AUTO_INCREMENT,   -- Correction : ajout d'un vrai ID
     id_service INT NOT NULL,
     id_dentiste INT NOT NULL,
+    PRIMARY KEY (id_service, id_dentiste),
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service) ON DELETE CASCADE,
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE CASCADE,
-    UNIQUE KEY unique_service_dentiste (id_service, id_dentiste)  -- Empêche doublons
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste) ON DELETE CASCADE
 );
 
 -- =============================================
 -- Table CHEFCABINET_CABINET (Correction demandée)
 -- =============================================
 CREATE TABLE CHEFCABINET_CABINET (
-    id_CHEFCABINET_CABINET INT PRIMARY KEY AUTO_INCREMENT,
     id_chef_cabinet INT NOT NULL,
     id_cabinet INT NOT NULL,
+    PRIMARY KEY (id_chef_cabinet, id_cabinet),
     FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet) ON DELETE CASCADE,
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE CASCADE,
-    
-    -- EMPÊCHE LES DOUBLONS (1,2) et (1,2)
-    UNIQUE KEY unique_chef_cabinet (id_chef_cabinet, id_cabinet)
 );
 

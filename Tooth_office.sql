@@ -37,14 +37,18 @@ CREATE TABLE Chef_Cabinet (
 -- Table Secrétaire
 CREATE TABLE Secretaire (
     id_secretaire INT PRIMARY KEY,
+    id_cabinet INT NOT NULL,
     FOREIGN KEY (id_secretaire) REFERENCES Utilisateur(id_utilisateur)
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
 );
 
 -- Table Dentiste
 CREATE TABLE Dentiste (
     id_dentiste INT PRIMARY KEY,
     specialite VARCHAR(100),
+    id_cabinet INT NOT NULL,
     FOREIGN KEY (id_dentiste) REFERENCES Utilisateur(id_utilisateur)
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
 );
 
 -- Table Patient
@@ -201,20 +205,4 @@ CREATE TABLE CHEFCABINET_CABINET (
     PRIMARY KEY (id_chef_cabinet, id_cabinet),
     FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet),
     FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
-);
-
-CREATE TABLE SECRETAIRE_CABINET (
-    id_secretaire INT NOT NULL,
-    id_cabinet INT NOT NULL,
-    PRIMARY KEY (id_secretaire, id_cabinet),
-    FOREIGN KEY (id_secretaire) REFERENCES Secretaire(id_secretaire),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
-);
-
-CREATE TABLE DENTISTE_CABINET (
-    id_dentiste INT NOT NULL,
-    id_cabinet INT NOT NULL,
-    PRIMARY KEY (id_dentiste, id_cabinet),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste),
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet)
-);
+)
