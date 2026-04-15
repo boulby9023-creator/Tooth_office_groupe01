@@ -197,7 +197,7 @@ CREATE TABLE  SERVICE_DENTISTE (
     id_service int,
     id_dentiste int,
     FOREIGN KEY (id_service) REFERENCES SERVICES(id_service),
-    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(Dentiste)
+    FOREIGN KEY (id_dentiste) REFERENCES Dentiste(id_dentiste)
  );
 
 CREATE TABLE  CHEFCABINET_CABINET (
