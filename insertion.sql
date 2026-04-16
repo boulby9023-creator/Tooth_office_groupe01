@@ -1,6 +1,50 @@
 -- Insertion des donnees pour la base Tooth_office
 -- NOTE: Executer ces commandes uniquement si les donnees n'existent pas deja
 
+USE tooth_office;
+
+DELIMITER //
+
+CREATE TRIGGER Avant_insert_abonnement
+BEFORE INSERT ON abonnement
+FOR EACH ROW
+BEGIN
+    DECLARE nb_actif INT;
+    DECLARE id_plan INT;
+    
+    SELECT COUNT(*)  
+    INTO nb_plan
+    FROM abonnement
+    WHERE id_plan_abonnement = NEW.id_plan_abonnement
+      AND date_fin > CURRENT_DATE;
+
+    -- Vérifier s'il existe déjà un abonnement actif
+    SELECT COUNT(*) 
+    INTO nb_actif
+    FROM abonnement
+    WHERE id_chef_cabinet = NEW.id_chef_cabinet
+      AND date_fin > CURRENT_DATE;
+
+    IF nb_actif > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erreur : Un abonnement est déjà actif pour ce cabinet.';
+    ELSE
+        -- Initialiser automatiquement les dates
+        SET NEW.date_debut = CURRENT_DATE;
+        SET NEW.date_fin = DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH);
+    END IF;
+    
+    IF nb_actif>0 and nb_plan=0 then
+		SET NEW.date_debut = CURRENT_DATE + date_fin;
+        SET NEW.date_fin = DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH);
+	END IF;
+
+END //
+
+DELIMITER ;
+
+
+
 DELIMITER //
 
 CREATE TRIGGER before_insert_chef_cabinet_cabinet
