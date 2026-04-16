@@ -234,6 +234,6 @@ CREATE TABLE CHEFCABINET_CABINET (
     id_cabinet INT NOT NULL,
     PRIMARY KEY (id_chef_cabinet, id_cabinet),
     FOREIGN KEY (id_chef_cabinet) REFERENCES Chef_Cabinet(id_chef_cabinet) ON DELETE CASCADE,
-    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE CASCADE,
+    FOREIGN KEY (id_cabinet) REFERENCES Cabinet(id_cabinet) ON DELETE CASCADE
 );
 
